@@ -1,66 +1,458 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { MdKeyboardDoubleArrowDown } from "react-icons/md";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import styles from "./page.module.scss";
+
+// Image paths
+const LOGO_SRC = "/images/logo.svg";
+const HERO_SRC = "/images/hero.jpg";
+const TEAM_SRC = "/images/team.jpg";
+const ELECTRICAL_SRC = "/images/electrical.jpg";
+const MECHANICAL_SRC = "/images/mechanical.jpg";
+const MANAGEMENT_SRC = "/images/management.jpg";
+const CONTACT_SRC = "/images/contact.jpg";
+const ARNAV_LEADER_SRC = "/images/leader1.jpg";
+const SUTIRTH_LEADER_SRC = "/images/leader2.jpg";
+const SARTHAK_LEADER_SRC = "/images/leader3.jpg";
+
+// ===============================
+// NAVBAR COMPONENT
+// ===============================
+const Navbar: React.FC = () => {
+  const navbarRef = useRef<HTMLElement>(null);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (navbarRef.current) {
+        if (window.scrollY > 0) {
+          navbarRef.current.classList.add(styles.scrolled);
+        } else {
+          navbarRef.current.classList.remove(styles.scrolled);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+    targetId: string
+  ) => {
+    e.preventDefault();
+    const target = document.querySelector(targetId);
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+    setMenuOpen(false);
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <nav ref={navbarRef} className={styles.navbar}>
+      <div className={styles.container}>
+        {/* Logo */}
+        <div className={styles.logo}>
+          <Image
+            src={LOGO_SRC}
+            alt="Inspired Karters"
+            className={styles.logoImg}
+            width={40}
+            height={40}
+            priority
+          />
+        </div>
+
+        {/* Hamburger */}
+        <div
+          className={`${styles.hamburger} ${menuOpen ? styles.active : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        {/* Nav Links */}
+        <ul
+          className={`${styles.navLinks} ${menuOpen ? styles.active : ""}`}
+          onClick={() => setMenuOpen(false)}
+        >
+          <li>
+            <Link href="#home" onClick={(e) => handleLinkClick(e, "#home")}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="#subsystems"
+              onClick={(e) => handleLinkClick(e, "#subsystems")}
+            >
+              Our Subsystems
+            </Link>
+          </li>
+          <li>
+            <Link href="#alumni" onClick={(e) => handleLinkClick(e, "#alumni")}>
+              Our Alumni
+            </Link>
+          </li>
+
+          {/* Mobile contact */}
+          <li className={styles.mobileContact}>
+            <button onClick={(e) => handleLinkClick(e, "#contact")}>
+              Contact Us
+            </button>
+          </li>
+        </ul>
+
+        {/* Desktop Contact Button */}
+        <button
+          className={styles.contactBtn}
+          onClick={(e) => handleLinkClick(e, "#contact")}
+        >
+          Contact Us
+        </button>
+      </div>
+    </nav>
+  );
+};
+
+// ===============================
+// MAIN PAGE
+// ===============================
+const InspiredKartersPage: React.FC = () => {
+useEffect(() => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.innerWidth > 768) {
+    const ctx = gsap.context(() => {
+      // HERO TEXT
+      gsap.fromTo(
+        `.${styles.heroContent}`,
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.4,
+          ease: "power4.out",
+          delay: 0.3,
+        }
+      );
+
+      // ABOUT SECTION
+      gsap.fromTo(
+        `.${styles.aboutContent}`,
+        { y: 100, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "expo.out",
+          duration: 1.8,
+          scrollTrigger: {
+            trigger: `.${styles.aboutContent}`,
+            start: "top 90%",
+            end: "top 30%",
+            scrub: 1.5, // smoother delayed scrub
+          },
+        }
+      );
+
+      // ACHIEVEMENTS
+      gsap.utils.toArray(`.${styles.achievementCard}`).forEach((card: any, i) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 60 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 95%",
+              end: "top 35%",
+              scrub: 1.2,
+            },
+          }
+        );
+      });
+
+      // LEADERS
+      gsap.utils.toArray(`.${styles.leaderCard}`).forEach((card: any, i) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, scale: 0.9 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1.4,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              end: "top 40%",
+              scrub: 1.3,
+            },
+          }
+        );
+      });
+
+      // DIVISIONS
+      gsap.utils.toArray(`.${styles.division}`).forEach((div: any, i) => {
+        gsap.fromTo(
+          div,
+          { x: i % 2 === 0 ? -120 : 120, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1.8,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: div,
+              start: "top 90%",
+              end: "top 30%",
+              scrub: 1.6,
+            },
+          }
+        );
+      });
+
+      // CONTACT
+      gsap.fromTo(
+        `.${styles.contactContent}`,
+        { y: 120, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "power4.out",
+          duration: 1.6,
+          scrollTrigger: {
+            trigger: `.${styles.contactContent}`,
+            start: "top 90%",
+            end: "top 30%",
+            scrub: 1.5,
+          },
+        }
+      );
+    });
+
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", refresh);
+    window.addEventListener("orientationchange", refresh);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("resize", refresh);
+      window.removeEventListener("orientationchange", refresh);
+    };
+  }
+}, []);
+
+  return (
+    <>
+      <Navbar />
+
+      {/* HERO */}
+      <section id="home" className={styles.hero}>
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src={HERO_SRC}
+          alt="Electric Formula Student Car"
+          fill
+          style={{ objectFit: "cover" }}
           priority
         />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div className={styles.heroOverlay}></div>
+        <div className={styles.heroContent}>
+          <h1>INSPIRED KARTERS ELECTRIC</h1>
+          <p className={styles.tagline}>Driving Innovation Sustainably</p>
+          <Link href="#about" className={styles.scrollHint}>
+            Downshift to learn more{" "}
+            <span className={styles.icon}>
+              <MdKeyboardDoubleArrowDown />
+            </span>
+          </Link>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className={`${styles.section} ${styles.about}`}>
+        <h2>WHO ARE WE?</h2>
+        <div className={styles.aboutContent}>
+          <Image
+            src={TEAM_SRC}
+            alt="Team"
+            className={styles.aboutImg}
+            width={550}
+            height={350}
+            style={{ objectFit: "cover" }}
+          />
+          <div className={styles.aboutText}>
+            <p>
+              In 2010, a passion-driven cadre rose from the sands of Pilani,
+              handicapped by the location even before inception, the team paid
+              no heed to the obstacles at hand as they began their journey in
+              the realm of race-car–engineering. This is how we started.
+            </p>
+            <p>
+              <strong>Inspired Karters</strong> is BITS Pilani&apos;s Formula
+              Student Team and over the last decade, we have made several
+              vehicles that have led to national as well as international
+              prowess.
+            </p>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ACHIEVEMENTS */}
+      <section className={styles.achievements}>
+        <h2>PAST ACHIEVEMENTS</h2>
+        <div className={styles.achievementsGrid}>
+          {[
+            ["Formula Student Italy 2014 – Design Category", "1st"],
+            ["FSEV Concept Challenge 2019 – FMEA Report", "1st"],
+            ["FSEV Concept Challenge 2019 – National Rank", "2nd"],
+            ["FSEV Concept Challenge 2020 – National Rank", "1st"],
+            ["Formula Bharat 2023 – Business Plan Presentation", "2nd"],
+            ["FSEV Concept Challenge 2021 – National Rank", "3rd"],
+          ].map(([title, rank], i) => (
+            <div key={i} className={styles.achievementCard}>
+              <p className={styles.achievementTitle}>{title}</p>
+              <p className={styles.achievementRank}>{rank}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* LEADERS */}
+      <section id="alumni" className={styles.leaders}>
+        <h2>OUR TEAM LEADERS</h2>
+        <div className={styles.leadersGrid}>
+          {[
+            [ARNAV_LEADER_SRC, "Arnav Geet Verma", "Team Captain"],
+            [SUTIRTH_LEADER_SRC, "Sutirth Rath", "Team Manager"],
+            [SARTHAK_LEADER_SRC, "Sarthak Gupta", "Team Vice-Captain"],
+          ].map(([src, name, role], i) => (
+            <div key={i} className={styles.leaderCard}>
+              <Image
+                src={src}
+                alt={name}
+                className={styles.leaderImg}
+                width={220}
+                height={240}
+              />
+              <h3>{name}</h3>
+              <p className={styles.leaderRole}>{role}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* DIVISIONS */}
+      <section id="subsystems" className={`${styles.section} ${styles.divisions}`}>
+        <h2>OUR OPERATION DIVISIONS</h2>
+        <div className={styles.divisionsContainer}>
+          {[
+            [
+              ELECTRICAL_SRC,
+              "Electrical Subsystem",
+              "The Electrical Subsystem is the team's backbone, providing the power and control necessary for peak on-track performance. Their expertise in power electronics, embedded systems, and control systems enables them to develop high-performance battery management systems and intricate motor control algorithms.",
+            ],
+            [
+              MECHANICAL_SRC,
+              "Mechanical Subsystem",
+              "The Mechanical Subsystem plays a pivotal role in designing and fabricating the vehicle's mechanical components. From optimizing suspension geometry to enhancing aerodynamic efficiency, every aspect of the design is meticulously crafted to ensure peak performance on the track.",
+              true,
+            ],
+            [
+              MANAGEMENT_SRC,
+              "Management Subsystem",
+              "The Management Subsystem ensures smooth coordination and effective execution of all team activities. The management subsystem oversees budgeting, sponsorship acquisition, logistics, and collaboration between different subsystems, enabling seamless integration of mechanical and electrical components.",
+            ],
+          ].map(([src, name, desc, reverse], i) => (
+            <div
+              key={i}
+              className={`${styles.division} ${reverse ? styles.reverse : ""}`}
+            >
+              <Image
+                src={src as string}
+                alt={name as string}
+                className={styles.divisionImg}
+                width={550}
+                height={300}
+                style={{ objectFit: "cover" }}
+              />
+              <p className={styles.divisionText}>
+                The <span className={styles.accentText}>{name}</span> {desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className={`${styles.section} ${styles.contact}`}>
+        <h2>CONTACT US</h2>
+        <div className={styles.contactContent}>
+          <Image
+            src={CONTACT_SRC}
+            alt="Contact Team"
+            className={styles.contactImg}
+            width={500}
+            height={300}
+            style={{ objectFit: "cover" }}
+          />
+          <div className={styles.contactInfo}>
+            <div className={styles.contactItem}>
+              <Image
+                src="/mail.svg"
+                alt="Email Icon"
+                className={styles.contactIcon}
+                width={22}
+                height={22}
+              />
+              <p>sutirthrath@gmail.com</p>
+            </div>
+            <div className={styles.contactItem}>
+              <Image
+                src="/phone.svg"
+                alt="Phone Icon"
+                className={styles.contactIcon}
+                width={22}
+                height={22}
+              />
+              <p>+91 94384 44888</p>
+            </div>
+            <div className={styles.contactItem}>
+              <Image
+                src="/location.svg"
+                alt="Location Icon"
+                className={styles.contactIcon}
+                width={22}
+                height={22}
+              />
+              <p>
+                BITS Pilani, Vidya Vihar
+                <br />
+                Pilani, Rajasthan – 333031
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
-}
+};
+
+export default InspiredKartersPage;
