@@ -21,9 +21,6 @@ const ARNAV_LEADER_SRC = "/images/leader1.jpg";
 const SUTIRTH_LEADER_SRC = "/images/leader2.jpg";
 const SARTHAK_LEADER_SRC = "/images/leader3.jpg";
 
-// ===============================
-// NAVBAR COMPONENT
-// ===============================
 const Navbar: React.FC = () => {
   const navbarRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -108,8 +105,7 @@ const Navbar: React.FC = () => {
               Our Alumni
             </Link>
           </li>
-
-          {/* Mobile contact */}
+          
           <li className={styles.mobileContact}>
             <button onClick={(e) => handleLinkClick(e, "#contact")}>
               Contact Us
@@ -117,7 +113,7 @@ const Navbar: React.FC = () => {
           </li>
         </ul>
 
-        {/* Desktop Contact Button */}
+      
         <button
           className={styles.contactBtn}
           onClick={(e) => handleLinkClick(e, "#contact")}
@@ -129,9 +125,7 @@ const Navbar: React.FC = () => {
   );
 };
 
-// ===============================
-// MAIN PAGE
-// ===============================
+
 const InspiredKartersPage: React.FC = () => {
 useEffect(() => {
   gsap.registerPlugin(ScrollTrigger);
@@ -164,50 +158,55 @@ useEffect(() => {
             trigger: `.${styles.aboutContent}`,
             start: "top 90%",
             end: "top 30%",
-            scrub: 1.5, // smoother delayed scrub
+            scrub: 1.5, 
           },
         }
       );
 
-      // ACHIEVEMENTS
-      gsap.utils.toArray(`.${styles.achievementCard}`).forEach((card: any, i) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 60 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 95%",
-              end: "top 35%",
-              scrub: 1.2,
-            },
-          }
-        );
-      });
+// ACHIEVEMENTS
+gsap.utils.toArray(`.${styles.achievementCard}`).forEach((card: any, i) => {
+  gsap.fromTo(
+    card,
+    { opacity: 0, y: 50, scale: 0.9 },
+    {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.1,
+      delay: i * 0.25,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        end: "top 40%",
+        scrub: 1.2,
+      },
+    }
+  );
+});
 
       // LEADERS
-      gsap.utils.toArray(`.${styles.leaderCard}`).forEach((card: any, i) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, scale: 0.9 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 1.4,
-            ease: "power4.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 90%",
-              end: "top 40%",
-              scrub: 1.3,
-            },
-          }
-        );
-      });
+gsap.utils.toArray(`.${styles.leaderCard}`).forEach((card: any, i) => {
+  const fromX = i % 2 === 0 ? -100 : 100; // alternate directions
+  gsap.fromTo(
+    card,
+    { opacity: 0, x: fromX, scale: 0.9 },
+    {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      duration: 1.3,
+      ease: "expo.out",
+      delay: i * 0.1,
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        end: "top 40%",
+        scrub: 1.2,
+      },
+    }
+  );
+});
 
       // DIVISIONS
       gsap.utils.toArray(`.${styles.division}`).forEach((div: any, i) => {
@@ -230,22 +229,22 @@ useEffect(() => {
       });
 
       // CONTACT
-      gsap.fromTo(
-        `.${styles.contactContent}`,
-        { y: 120, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          ease: "power4.out",
-          duration: 1.6,
-          scrollTrigger: {
-            trigger: `.${styles.contactContent}`,
-            start: "top 90%",
-            end: "top 30%",
-            scrub: 1.5,
-          },
-        }
-      );
+    gsap.fromTo(
+  `.${styles.contactContent}`,
+  { opacity: 0, scale: 0.9 },
+  {
+    opacity: 1,
+    scale: 1,
+    ease: "power4.out",
+    duration: 1.5,
+    scrollTrigger: {
+      trigger: `.${styles.contactContent}`,
+      start: "top 90%",
+      end: "top 30%",
+      scrub: 1.4,
+    },
+  }
+);
     });
 
     const refresh = () => ScrollTrigger.refresh();

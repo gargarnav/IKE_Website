@@ -701,9 +701,7 @@
   filter: invert(39%) sepia(92%) saturate(4019%) hue-rotate(341deg) brightness(90%) contrast(93%);
   
 }
-/* ===========================
-   📱 MOBILE RESPONSIVENESS FIX
-   =========================== */
+
 @media (max-width: 768px) {
   /* General adjustments */
   .container {
@@ -857,7 +855,6 @@
     font-size: 1rem;
   }
 
-  /* Responsive heading scaling */
   :global(h2) {
     font-size: 1.8rem !important;
   }
@@ -883,11 +880,11 @@
     }
 
   @media (max-width: 768px) {
-    display: none; // Hide contact button on mobile
+    display: none; 
   }
 }
 .mobileContact {
-  display: none; // hidden by default
+  display: none; 
 
   @media (max-width: 768px) {
     display: flex;
@@ -922,3 +919,15 @@
   }
 }
 
+
+:global(::-webkit-scrollbar) {
+  display: none;
+}
+
+:global(html) {
+  scrollbar-width: none; 
+}
+
+:global(body) {
+  -ms-overflow-style: none; 
+}
