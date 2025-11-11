@@ -61,16 +61,19 @@ const Navbar: React.FC = () => {
     <nav ref={navbarRef} className={styles.navbar}>
       <div className={styles.container}>
         {/* Logo */}
-        <div className={styles.logo}>
-          <Image
-            src={LOGO_SRC}
-            alt="Inspired Karters"
-            className={styles.logoImg}
-            width={40}
-            height={40}
-            priority
-          />
-        </div>
+       <div className={styles.logo}>
+  <Link href="#home" onClick={(e) => handleLinkClick(e, "#home")}>
+    <Image
+      src={LOGO_SRC}
+      alt="Inspired Karters"
+      className={styles.logoImg}
+      width={40}
+      height={40}
+      priority
+    />
+  </Link>
+</div>
+
 
         {/* Hamburger */}
         <div
@@ -403,15 +406,24 @@ gsap.utils.toArray(`.${styles.leaderCard}`).forEach((card: any, i) => {
       {/* CONTACT */}
       <section id="contact" className={`${styles.section} ${styles.contact}`}>
         <h2>CONTACT US</h2>
-        <div className={styles.contactContent}>
-          <Image
-            src={CONTACT_SRC}
-            alt="Contact Team"
-            className={styles.contactImg}
-            width={500}
-            height={300}
-            style={{ objectFit: "cover" }}
-          />
+       <div className={styles.contactContent}>
+ <div className={styles.mapContainer}>
+  <a
+    href="https://maps.app.goo.gl/7d1RqPytR4v4b7Ja6"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={styles.mapOverlay}
+  ></a>
+
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.5905603845694!2d75.58583847545637!3d28.35880887581602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3913d0a23fdb6799%3A0x7e84c26cd0826db9!2sBITS%20Pilani!5e0!3m2!1sen!2sin!4v1708264236478!5m2!1sen!2sin"
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
+
+
           <div className={styles.contactInfo}>
             <div className={styles.contactItem}>
               <Image
