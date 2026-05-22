@@ -873,7 +873,7 @@
     margin-right: 0rem;
     
     &:hover {
-        background: linear-gradient(to right, darken(#450121, 5%) 0%, darken(#A2051A, 5%) 100%);
+        background: linear-gradient(to right, #36011b 0%, #890517 100%);
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
@@ -908,8 +908,8 @@
       &:hover {
         background: linear-gradient(
           to right,
-          darken(#450121, 5%) 0%,
-          darken(#a2051a, 5%) 100%
+          #36011b 0%,
+          #890517 100%
         );
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
