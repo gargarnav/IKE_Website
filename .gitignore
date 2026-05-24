@@ -23,7 +23,6 @@
 # misc
 .DS_Store
 *.pem
-team_data.json
 
 # debug
 npm-debug.log*
