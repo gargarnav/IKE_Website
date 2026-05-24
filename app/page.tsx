@@ -9,6 +9,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import styles from "./page.module.scss";
 
+import teamData from "../team_data.json";
+
 // Image paths
 const LOGO_SRC = "/images/logo.svg";
 const HERO_SRC = "/images/hero.jpg";
@@ -17,9 +19,24 @@ const ELECTRICAL_SRC = "/images/electrical.jpg";
 const MECHANICAL_SRC = "/images/mechanical.jpg";
 const MANAGEMENT_SRC = "/images/management.jpg";
 const CONTACT_SRC = "/images/contact.jpg";
-const ARNAV_LEADER_SRC = "/images/leader1.jpg";
-const SUTIRTH_LEADER_SRC = "/images/leader2.jpg";
-const SARTHAK_LEADER_SRC = "/images/leader3.jpg";
+
+// Group the team members by Name and combine their PORs
+const groupedTeamData = teamData.reduce((acc, curr) => {
+  if (!acc[curr.Name]) {
+    acc[curr.Name] = { ...curr, POR: [curr.POR].filter(Boolean) };
+  } else {
+    if (curr.POR && !acc[curr.Name].POR.includes(curr.POR)) {
+      acc[curr.Name].POR.push(curr.POR);
+    }
+  }
+  return acc;
+}, {} as Record<string, any>);
+
+const teamArray = Object.values(groupedTeamData).map(member => ({
+  src: `/images/${member.Name}.jpeg`,
+  name: member.Name,
+  role: member.POR.join(", ")
+}));
 
 const Navbar: React.FC = () => {
   const navbarRef = useRef<HTMLElement>(null);
@@ -337,25 +354,21 @@ gsap.utils.toArray(`.${styles.leaderCard}`).forEach((card: any, i) => {
         </div>
       </section>
 
-      {/* LEADERS */}
+      {/* LEADERS / PORs */}
       <section id="alumni" className={styles.leaders}>
-        <h2>OUR TEAM LEADERS</h2>
+        <h2>OUR TEAM & PORs</h2>
         <div className={styles.leadersGrid}>
-          {[
-            [ARNAV_LEADER_SRC, "Arnav Geet Verma", "Team Captain"],
-            [SUTIRTH_LEADER_SRC, "Sutirth Rath", "Team Manager"],
-            [SARTHAK_LEADER_SRC, "Sarthak Gupta", "Team Vice-Captain"],
-          ].map(([src, name, role], i) => (
+          {teamArray.map((member, i) => (
             <div key={i} className={styles.leaderCard}>
               <Image
-                src={src}
-                alt={name}
+                src={member.src}
+                alt={member.name}
                 className={styles.leaderImg}
                 width={220}
                 height={240}
               />
-              <h3>{name}</h3>
-              <p className={styles.leaderRole}>{role}</p>
+              <h3>{member.name}</h3>
+              <p className={styles.leaderRole}>{member.role}</p>
             </div>
           ))}
         </div>
