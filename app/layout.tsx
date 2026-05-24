@@ -10,8 +10,14 @@ const varela = Varela_Round({
 });
 
 export const metadata: Metadata = {
-  title: "Inspired Karters",
-  description: "Static Next.js website using Sass",
+  title: "Inspired Karters Electric | BITS Pilani",
+  description: "Official website of Inspired Karters Electric (IKE), the premier formula student EV racing team from BITS Pilani.",
+  keywords: "Inspired Karters, BITS Pilani, Formula Student, Racing Team, Engineering, EV, Formula EV, Electric Vehicle, IKE",
+  icons: {
+    icon: '/images/logo.svg',
+    shortcut: '/images/logo.svg',
+    apple: '/images/logo.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
