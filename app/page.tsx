@@ -438,40 +438,24 @@ gsap.utils.toArray(`.${styles.leaderCard}`).forEach((card: any, i) => {
 
 
           <div className={styles.contactInfo}>
-            <div className={styles.contactItem}>
-              <Image
-                src="/mail.svg"
-                alt="Email Icon"
-                className={styles.contactIcon}
-                width={22}
-                height={22}
-              />
-              <p>sutirthrath@gmail.com</p>
-            </div>
-            <div className={styles.contactItem}>
-              <Image
-                src="/phone.svg"
-                alt="Phone Icon"
-                className={styles.contactIcon}
-                width={22}
-                height={22}
-              />
-              <p>+91 94384 44888</p>
-            </div>
-            <div className={styles.contactItem}>
-              <Image
-                src="/location.svg"
-                alt="Location Icon"
-                className={styles.contactIcon}
-                width={22}
-                height={22}
-              />
-              <p>
-                BITS Pilani, Vidya Vihar
-                <br />
-                Pilani, Rajasthan – 333031
-              </p>
-            </div>
+            <h3 style={{ color: "#a2051a", marginTop: 0, marginBottom: "0.5rem", fontSize: "1.4rem", textTransform: "uppercase" }}>
+              READY TO CO-ENGINEER?
+            </h3>
+            <p style={{ fontWeight: "bold", fontSize: "1.15rem", margin: "0.2rem 0", color: "#fff" }}>
+              Eesha Santosh Deshpande
+            </p>
+            <p style={{ fontWeight: "bold", fontSize: "1.15rem", margin: "0.2rem 0", color: "#fff" }}>
+              Management Lead, Inspired Karters Electric
+            </p>
+            <p style={{ fontWeight: "bold", fontSize: "1.15rem", margin: "0.2rem 0", color: "#fff" }}>
+              +91 63666 70651
+            </p>
+            <p style={{ fontSize: "1.15rem", margin: "0.2rem 0", color: "#cecece" }}>
+              fs.inspiredkarters@gmail.com
+            </p>
+            <p style={{ fontSize: "1.15rem", margin: "0.2rem 0", color: "#888" }}>
+              Inspired Karters Electric
+            </p>
           </div>
         </div>
       </section>
