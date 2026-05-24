@@ -12,6 +12,12 @@
     "F1 track": "Spa- belgium"
   },
   {
+    "Name": "Eesha Santosh Despande",
+    "POR": "Team Manager",
+    "Department": "Mangement",
+    "F1 track": ""
+  },
+  {
     "Name": "Tanush Agarwal",
     "POR": "Elec Lead",
     "Department": "Electrical",
@@ -105,12 +111,6 @@
     "Name": "Arsh Surana",
     "POR": "",
     "Department": "",
-    "F1 track": ""
-  },
-  {
-    "Name": "Eesha Santosh Despande",
-    "POR": "Team Manager(most important POR)",
-    "Department": "Mangement",
     "F1 track": ""
   }
 ]
