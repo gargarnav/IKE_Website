@@ -10,6 +10,7 @@ const varela = Varela_Round({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ike-taupe.vercel.app"),
   title: "Inspired Karters Electric | BITS Pilani",
   description: "Official website of Inspired Karters Electric (IKE), the premier formula student EV racing team from BITS Pilani.",
   keywords: "Inspired Karters, BITS Pilani, Formula Student, Racing Team, Engineering, EV, Formula EV, Electric Vehicle, IKE",
@@ -17,6 +18,21 @@ export const metadata: Metadata = {
     icon: '/images/logo.svg',
     shortcut: '/images/logo.svg',
     apple: '/images/logo.svg',
+  },
+  openGraph: {
+    title: "Inspired Karters Electric | BITS Pilani",
+    description: "Official website of Inspired Karters Electric (IKE), the premier formula student EV racing team from BITS Pilani.",
+    url: "https://ike-taupe.vercel.app",
+    siteName: "Inspired Karters",
+    images: [
+      {
+        url: "/images/hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Inspired Karters Electric Team",
+      },
+    ],
+    type: "website",
   },
 };
 
