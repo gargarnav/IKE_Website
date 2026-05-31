@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Varela_Round } from "next/font/google";
-import "./globals.scss";
+import "./globals.css";
 
 const varela = Varela_Round({
   weight: "400",
