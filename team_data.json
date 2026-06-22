@@ -43,67 +43,67 @@
   },
   {
     "Name": "Madhur Nk",
-    "POR": "Vehcile dynamics lead",
+    "POR": "Vehcile dynamics Lead",
     "Department": "Mechnical",
     "F1 track": "SPA"
   },
   {
     "Name": "Anupam Sahai",
-    "POR": "Braking",
+    "POR": "Braking Lead",
     "Department": "Mechnical",
     "F1 track": "Spa-Francorchamps"
   },
   {
     "Name": "Aarnav Piparsania",
-    "POR": "Steering",
+    "POR": "Accumulator Lead",
     "Department": "Mechnical",
     "F1 track": "interlagos"
   },
   {
     "Name": "Malhar Patwardhan",
-    "POR": "Aero",
+    "POR": "Aero Lead",
     "Department": "Mechnical",
     "F1 track": ""
   },
   {
     "Name": "Gourav Jhanwar",
-    "POR": "Chassis & Powertrain",
+    "POR": "Chassis & Powertrain Lead",
     "Department": "Mechnical",
     "F1 track": "budh circuit(if not silverstone)"
   },
   {
     "Name": "Saksham Bhatnagar",
-    "POR": "Motor",
+    "POR": "Motor Lead",
     "Department": "electrical",
     "F1 track": "Monza"
   },
   {
     "Name": "Tanush Agarwal",
-    "POR": "Pcb",
+    "POR": "Pcb Lead",
     "Department": "electrical",
     "F1 track": "Spa belgium"
   },
   {
     "Name": "Dhwani Bandi",
-    "POR": "RnD",
+    "POR": "Research and Development Lead",
     "Department": "Research",
     "F1 track": ""
   },
   {
     "Name": "Aarav Gupta",
-    "POR": "LV",
+    "POR": "Low Voltage Lead",
     "Department": "Electrical",
     "F1 track": ""
   },
   {
     "Name": "Ishan Chine",
-    "POR": "Operations",
+    "POR": "Operations Lead",
     "Department": "Mangement",
     "F1 track": ""
   },
   {
     "Name": "Pratham Jain",
-    "POR": "Logistics",
+    "POR": "Logistics Lead",
     "Department": "Mangement",
     "F1 track": "singapore"
   },
